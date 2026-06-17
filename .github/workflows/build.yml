@@ -1,0 +1,45 @@
+name: Build foo_gdrive_stream
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install C++ Build Tools with ATL/MFC
+        shell: powershell
+        run: |
+          choco install visualstudio2022-workload-vctools --package-parameters "--add Microsoft.VisualStudio.Component.VC.ATL --add Microsoft.VisualStudio.Component.VC.ATLMFC" -y
+
+      - name: Setup MSVC Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Build and test
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build.ps1 -Config Release -Platform x64
+
+      - name: Upload component package
+        uses: actions/upload-artifact@v4
+        with:
+          name: foo_gdrive_stream-component
+          path: foo_gdrive_stream/_result/foo_gdrive_stream.fb2k-component
+          if-no-files-found: error
+
+      - name: Upload DLL
+        uses: actions/upload-artifact@v4
+        with:
+          name: foo_gdrive_stream-dll
+          path: foo_gdrive_stream/_result/x64_Release/bin/foo_gdrive_stream.dll
+          if-no-files-found: error

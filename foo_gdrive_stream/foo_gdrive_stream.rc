@@ -1,0 +1,33 @@
+#include "resource.h"
+#include <winres.h>
+
+IDD_PREFERENCES DIALOGEX 0, 0, 330, 166
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "OAuth client JSON:", -1, 8, 10, 82, 8
+    EDITTEXT        IDC_EDIT_CLIENT_JSON, 94, 8, 178, 14, ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...", IDC_BTN_BROWSE_CLIENT, 276, 7, 46, 16
+    LTEXT           "Drive folder ID/URL:", -1, 8, 34, 82, 8
+    EDITTEXT        IDC_EDIT_FOLDER, 94, 32, 228, 14, ES_AUTOHSCROLL
+    LTEXT           "Cache folder:", -1, 8, 58, 82, 8
+    EDITTEXT        IDC_EDIT_CACHE_DIR, 94, 56, 178, 14, ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...", IDC_BTN_BROWSE_CACHE, 276, 55, 46, 16
+    LTEXT           "Cache limit MB:", -1, 8, 82, 82, 8
+    EDITTEXT        IDC_EDIT_CACHE_LIMIT, 94, 80, 54, 14, ES_NUMBER | ES_AUTOHSCROLL
+    PUSHBUTTON      "Clear saved token", IDC_BTN_CLEAR_TOKEN, 94, 110, 92, 18
+    LTEXT           "Use File > Authenticate Google Drive after selecting the client JSON.", -1, 8, 140, 300, 8
+END
+
+IDD_LOAD_FOLDER DIALOGEX 0, 0, 330, 96
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Load Google Drive Folder"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "Folder ID/URL:", -1, 8, 12, 78, 8
+    EDITTEXT        IDC_EDIT_LOAD_FOLDER, 90, 10, 232, 14, ES_AUTOHSCROLL
+    LTEXT           "Playlist name:", -1, 8, 38, 78, 8
+    EDITTEXT        IDC_EDIT_LOAD_PLAYLIST, 90, 36, 232, 14, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK", IDOK, 214, 70, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 270, 70, 50, 14
+END
